@@ -1,0 +1,7 @@
+These are notes for andrej karpathy
+The spelled-out intro to neurla networks and back propogation: building micrograd
+
+Backpropagation is an algorithm that allows you to efficiently evaluate the gradient of a loss function, which allows us to iteratively tune the weights of the neural network, and therfore increase the accuracy of the neural network
+
+Autograd- automatic gradient
+ \[;']

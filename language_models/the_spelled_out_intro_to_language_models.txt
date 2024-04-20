@@ -1,0 +1,30 @@
+make more : - make more of something
+
+Under the hood make more is a character leveel language model. It treats 
+lines a sequence of characters . Modeling sequences of character and we 
+have to predict next character in the sequence.
+
+makemore : Bigram, bag of words, mlp, rnn, GRU, transformer. 
+
+names.txt is a file with names
+
+['emma',
+ 'olivia',
+ 'ava',
+ 'isabella',
+ 'sophia',
+ 'charlotte',
+ 'mia',
+ 'amelia',
+ 'harper',
+ 'evelyn']
+
+
+every single word  has a bunch of examples inside an example.
+
+in isabella we can say that a comes after s .... and the word ends with a and so on and so forth
+we can model the structure.
+
+
+we're going to star with building a bigram language model, in a bigram languag emodel we're only worried about working with 2 characters at a time.
+
