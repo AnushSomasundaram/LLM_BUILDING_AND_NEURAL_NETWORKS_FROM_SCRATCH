@@ -8,6 +8,9 @@ makemore : Bigram, bag of words, mlp, rnn, GRU, transformer.
 
 names.txt is a file with names
 
+total number of words is 32000
+min len = 2 , max length =16
+
 ['emma',
  'olivia',
  'ava',
@@ -25,6 +28,89 @@ every single word  has a bunch of examples inside an example.
 in isabella we can say that a comes after s .... and the word ends with a and so on and so forth
 we can model the structure.
 
+the name isabella, tells us that s is likely to come after i and a is likely to come after s.
+this gives a structure to model
 
-we're going to star with building a bigram language model, in a bigram languag emodel we're only worried about working with 2 characters at a time.
+we're going to start with building a bigram language model, in a bigram languag emodel we're only worried about working with 2 characters at a time.
+
+bigram is a language model that uses ht eprevious character to predict the next one
+
+splitting the names into bigrams
+
+<s> e
+e m
+m m
+m a
+a <E>
+<s> o
+o l
+l i
+i v
+v i
+i a
+a <E>
+<s> a
+a v
+v a
+a <E>
+
+the simplest way to predict which characters follow other characters in the bigram language model is to count the number of 
+occurances of sequences. we're going to create a dictionary to count the occurances of the bigrams
+/--------g
+b={}
+for
+bigram = (ch1,ch2)
+b[bigram] = b.get(bigram,0)+1
+/--------
+
+(('n', '<E>'), 6763),
+ (('a', '<E>'), 6640),
+ (('a', 'n'), 5438),
+ (('<s>', 'a'), 4410),
+ (('e', '<E>'), 3983),
+ (('a', 'r'), 3264),
+ (('e', 'l'), 3248),
+ (('r', 'i'), 3033),
+ (('n', 'a'), 2977),
+ (('<s>', 'k'), 2963),
+ (('l', 'e'), 2921),
+ (('e', 'n'), 2675),
+ (('l', 'a'), 2623),
+ (('m', 'a'), 2590),
+ (('<s>', 'm'), 2538),
+ (('a', 'l'), 2528),
+ (('i', '<E>'), 2489),
+ (('l', 'i'), 2480),
+ (('i', 'a'), 2445),
+ (('<s>', 'j'), 2422),
+ (('o', 'n'), 2411),
+ (('h', '<E>'), 2409),
+
+/---------
+store info in 2d array
+
+the rows are going to be the first character in the 2d array and the comlumns are going to be the second character, kinda like the data structure thats shown below
+
+  a b c . . .  
+a 1 3 5
+b 4 6 7
+c 4 6 7
+.
+.
+.
+
+the array representaion we're going to use is available in pytorch
+a = torch.zeros((3,5),dtype=torch.int32)
+
+creating a look up table for characters
+/------------
+chars = sorted(list(set(''.join(words))))
+stoi = {s:i for i,s in enumerate(chars)}
+/------------
+
+the following provides the count of the number of times 2 letters appear consecutively in the dataset of names. (go to makemore_intro_to_langauge_models.ipynb and look at the heat map)
+
+now we have to take the count and convert it into probabilities, we can do this by taking the count of a particular elemennt and dividing it by the sum.
+
+we can then sample these probabilities by using torch.multinomial
 
