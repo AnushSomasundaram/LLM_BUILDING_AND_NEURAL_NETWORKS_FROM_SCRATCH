@@ -113,4 +113,4 @@ the following provides the count of the number of times 2 letters appear consecu
 now we have to take the count and convert it into probabilities, we can do this by taking the count of a particular elemennt and dividing it by the sum.
 
 we can then sample these probabilities by using torch.multinomial
-
+we have to create a generator
